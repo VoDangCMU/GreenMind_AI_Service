@@ -1,0 +1,7 @@
+{
+  "O": ["novelty_seeking", "variety_seeking", "cognitive_flexibility"],
+  "C": ["orderliness", "self_discipline"],
+  "E": ["sociability", "activity_level"],
+  "A": ["cooperation", "politeness"],
+  "N": ["anxiety", "stress_sensitivity"]
+}

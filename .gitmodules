@@ -1,0 +1,3 @@
+[submodule "app/ontology/bcio"]
+	path = app/ontology/bcio
+	url = https://github.com/HumanBehaviourChangeProject/ontologies.git
