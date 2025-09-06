@@ -1,0 +1,26 @@
+- template_id: C_001
+  type: yes_no
+  sentence: "Trong {thoi_gian}, bạn có thực hiện {behavior} theo lịch {lich_co_dinh} không?"
+  slots: ["thoi_gian", "lich_co_dinh"]
+  value_slot: ["Có", "Không"]
+  scoring: {"Có": 10, "Không": 1}
+  ocean: C
+  behavior: "sorting waste daily (BCIO:WasteSeparation)"
+
+- template_id: C_002
+  type: likert5
+  sentence: "Bạn duy trì {behavior} đều đặn ở mức nào?"
+  slots: []
+  value_slot: ["1", "2", "3", "4", "5"]
+  scoring: {"1": 2, "2": 4, "3": 6, "4": 8, "5": 10}
+  ocean: C
+  behavior: "tracking electricity use (BCIO:EnergyUseMonitoring)"
+
+- template_id: C_003
+  type: frequency
+  sentence: "Trong {thoi_gian}, tần suất bạn {behavior} là?"
+  slots: ["thoi_gian"]
+  value_slot: ["0–1 lần", "2–3 lần", "4–6 lần", "mỗi ngày"]
+  scoring: {"0–1 lần": 1, "2–3 lần": 4, "4–6 lần": 7, "mỗi ngày": 10}
+  ocean: C
+  behavior: "meal planning (BCIO:MealPlanning)"

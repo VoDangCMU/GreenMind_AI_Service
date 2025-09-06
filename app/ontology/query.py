@@ -40,6 +40,31 @@ def print_parent_children(df):
         for _, row in group.iterrows():
             print(f"   └── {row['ChildLabel']} ({row['ChildID']})")
 
+
+def get_leaf_behaviours(data):
+    """Trả về DataFrame chứa ID và Label của các leaf behaviour"""
+    # Lấy sheet đầu tiên (thường chỉ có 1 sheet chính)
+    sheetname = list(data["behaviour"].keys())[0]
+    df = data["behaviour"][sheetname].copy()
+
+    # Chuẩn hoá tên cột
+    df.columns = [str(c).strip().lower() for c in df.columns]
+
+    id_col = next((c for c in df.columns if "id" in c), None)
+    label_col = next((c for c in df.columns if "label" in c or "name" in c), None)
+    parent_col = next((c for c in df.columns if "parent" in c), None)
+
+    if not (id_col and label_col and parent_col):
+        raise RuntimeError("Không tìm thấy cột ID/Label/Parent trong file behaviour Excel!")
+
+    # Tìm các ID là cha
+    parent_ids = set(df[parent_col].dropna())
+
+    # Các leaf = ID không nằm trong parent_ids
+    leaf_df = df[~df[id_col].isin(parent_ids)][[id_col, label_col]].reset_index(drop=True)
+
+    return leaf_df
+
 if __name__ == "__main__":
     pd.set_option("display.max_columns", 0)
     pd.set_option("display.width", 160)

@@ -1,0 +1,35 @@
+- template_id: E_001
+  type: frequency
+  sentence: "Bạn có thường {behavior} không?"
+  slots: []
+  value_slot: ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"]
+  scoring: {"rất ít khi": 1, "thỉnh thoảng": 3, "thường xuyên": 7, "gần như mọi lúc": 10}
+  ocean: E
+  behavior: "laughing (BCIO:050374)"
+
+- template_id: E_002
+  type: yes_no
+  sentence: "Bạn có thích {behavior} không?"
+  slots: []
+  value_slot: ["Có", "Không"]
+  scoring: {"Có": 10, "Không": 1}
+  ocean: E
+  behavior: "reading behaviour (BCIO:036063)"
+
+- template_id: E_003
+  type: yes_no
+  sentence: "Khi {boi_canh}, bạn có thường {behavior} cùng {cung_voi} không?"
+  slots: ["boi_canh", "cung_voi"]
+  value_slot: ["Có", "Không"]
+  scoring: {"Có": 10, "Không": 1}
+  ocean: E
+  behavior: "group exercise (BCIO:022189)"
+
+- template_id: E_004
+  type: likert5
+  sentence: "Mức độ bạn thấy hứng khởi khi {behavior} là bao nhiêu?"
+  slots: []
+  value_slot: ["1", "2", "3", "4", "5"]
+  scoring: {"1": 2, "2": 4, "3": 6, "4": 8, "5": 10}
+  ocean: E
+  behavior: "attending social events (BCIO:009812)"

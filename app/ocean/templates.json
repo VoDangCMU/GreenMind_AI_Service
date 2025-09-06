@@ -1,7 +1,192 @@
 {
-  "O": ["novelty_seeking", "variety_seeking", "cognitive_flexibility"],
-  "C": ["orderliness", "self_discipline"],
-  "E": ["sociability", "activity_level"],
-  "A": ["cooperation", "politeness"],
-  "N": ["anxiety", "stress_sensitivity"]
+  "O": {
+    "frequency": [
+      {
+        "template_id": "O_F_001",
+        "sentence": "Bạn có thường {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
+        "ocean": "O"
+      },
+      {
+        "template_id": "O_F_002",
+        "sentence": "Trong cuộc sống hàng ngày, bạn {behavior} với tần suất thế nào?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["hiếm khi", "đôi khi", "thường xuyên", "rất thường xuyên"],
+        "ocean": "O"
+      }
+    ],
+    "yesno": [
+      {
+        "template_id": "O_YN_001",
+        "sentence": "Bạn có thích {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "O"
+      },
+      {
+        "template_id": "O_YN_002",
+        "sentence": "Bạn có hứng thú với việc {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "O"
+      }
+    ]
+  },
+  "C": {
+    "frequency": [
+      {
+        "template_id": "C_F_001",
+        "sentence": "Bạn có thường {behavior} khi làm việc không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
+        "ocean": "C"
+      },
+      {
+        "template_id": "C_F_002",
+        "sentence": "Mỗi khi có nhiệm vụ quan trọng, bạn {behavior} như thế nào?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["hiếm khi", "đôi khi", "thường xuyên", "luôn luôn"],
+        "ocean": "C"
+      }
+    ],
+    "yesno": [
+      {
+        "template_id": "C_YN_001",
+        "sentence": "Bạn có thường chú ý đến chi tiết khi {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "C"
+      },
+      {
+        "template_id": "C_YN_002",
+        "sentence": "Bạn có cho rằng mình đáng tin cậy khi {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "C"
+      }
+    ]
+  },
+  "E": {
+    "frequency": [
+      {
+        "template_id": "E_F_001",
+        "sentence": "Bạn có thường {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
+        "ocean": "E"
+      },
+      {
+        "template_id": "E_F_002",
+        "sentence": "Trong một tuần điển hình, bạn {behavior} bao nhiêu lần?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["0 lần", "1–2 lần", "3–5 lần", "hơn 5 lần"],
+        "ocean": "E"
+      }
+    ],
+    "yesno": [
+      {
+        "template_id": "E_YN_001",
+        "sentence": "Bạn có thích {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "E"
+      },
+      {
+        "template_id": "E_YN_002",
+        "sentence": "Bạn có cảm thấy thoải mái khi {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "E"
+      }
+    ]
+  },
+  "A": {
+    "frequency": [
+      {
+        "template_id": "A_F_001",
+        "sentence": "Khi làm việc nhóm, bạn {behavior} với tần suất như thế nào?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
+        "ocean": "A"
+      },
+      {
+        "template_id": "A_F_002",
+        "sentence": "Trong các mối quan hệ, bạn có xu hướng {behavior} với mức độ ra sao?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["hiếm khi", "đôi khi", "thường xuyên", "rất thường xuyên"],
+        "ocean": "A"
+      }
+    ],
+    "yesno": [
+      {
+        "template_id": "A_YN_001",
+        "sentence": "Bạn có thích {behavior} để giúp đỡ người khác không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "A"
+      },
+      {
+        "template_id": "A_YN_002",
+        "sentence": "Bạn có dễ dàng tha thứ khi người khác {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "A"
+      }
+    ]
+  },
+  "N": {
+    "frequency": [
+      {
+        "template_id": "N_F_001",
+        "sentence": "Bạn {behavior} với tần suất như thế nào khi gặp tình huống căng thẳng?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
+        "ocean": "N"
+      },
+      {
+        "template_id": "N_F_002",
+        "sentence": "Trong một tháng, bạn {behavior} bao nhiêu lần?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["0 lần", "1–2 lần", "3–5 lần", "hơn 5 lần"],
+        "ocean": "N"
+      }
+    ],
+    "yesno": [
+      {
+        "template_id": "N_YN_001",
+        "sentence": "Bạn có cảm thấy lo lắng khi {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "N"
+      },
+      {
+        "template_id": "N_YN_002",
+        "sentence": "Bạn có dễ bị căng thẳng khi {behavior} không?",
+        "slot": "behavior",
+        "value_behavior": [],
+        "value_slot": ["Có", "Không"],
+        "ocean": "N"
+      }
+    ]
+  }
 }

@@ -1,0 +1,26 @@
+- template_id: O_001
+  type: yes_no
+  sentence: "Trong {thoi_gian}, bạn có thử {behavior} thay vì thói quen cũ không?"
+  slots: ["thoi_gian"]
+  value_slot: ["Có", "Không"]
+  scoring: {"Có": 10, "Không": 1}
+  ocean: O
+  behavior: "try public transport instead of motorbike (BCIO:BusUse)"
+
+- template_id: O_002
+  type: likert5
+  sentence: "Bạn thấy {behavior} là trải nghiệm thú vị ở mức nào?"
+  slots: []
+  value_slot: ["1", "2", "3", "4", "5"]
+  scoring: {"1": 2, "2": 4, "3": 6, "4": 8, "5": 10}
+  ocean: O
+  behavior: "trying plant-based meals (BCIO:PlantBasedDiet)"
+
+- template_id: O_003
+  type: frequency
+  sentence: "Bạn chủ động tìm hiểu về {behavior} với tần suất nào?"
+  slots: []
+  value_slot: ["hiếm khi", "đôi khi", "thường xuyên", "rất thường xuyên"]
+  scoring: {"hiếm khi": 1, "đôi khi": 4, "thường xuyên": 7, "rất thường xuyên": 10}
+  ocean: O
+  behavior: "new eco-friendly practices (BCIO:BehaviourChangeLearning)"
