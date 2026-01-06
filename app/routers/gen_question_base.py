@@ -1,4 +1,3 @@
-# app/routers/gen_question.py
 from typing import List, Literal
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
@@ -28,6 +27,8 @@ class QuestionItem(BaseModel):
     behavior_input: str
     behavior_normalized: str
     normalize_score: float
+    qtype: Literal["frequency", "yesno"]   
+
 
 
 class GenQuestionResponse(BaseModel):
@@ -35,13 +36,16 @@ class GenQuestionResponse(BaseModel):
     items: List[QuestionItem]
 
 def _all_templates_for_ocean(ocean: str) -> List[dict]:
-    """Load all templates for a given OCEAN factor."""
     tpl = load_templates()
     block = tpl.get(ocean)
     if not block:
         raise HTTPException(status_code=400, detail=f"OCEAN không hợp lệ: {ocean}")
 
-    return (block.get("frequency") or []) + (block.get("yesno") or [])
+    freq = [{"qtype": "frequency", **t} for t in (block.get("frequency") or [])]
+    yesno = [{"qtype": "yesno", **t} for t in (block.get("yesno") or [])]
+
+    return freq + yesno
+
 
 
 def _render_question(sentence: str, behavior: str) -> str:
@@ -110,7 +114,9 @@ async def gen_question(req: GenQuestionRequest) -> GenQuestionResponse:
                 behavior_input=req.behavior_input,
                 behavior_normalized=behavior_norm,
                 normalize_score=conf,
+                qtype=t["qtype"]  
             )
         )
+
 
     return GenQuestionResponse(total_templates=len(templates), items=items)

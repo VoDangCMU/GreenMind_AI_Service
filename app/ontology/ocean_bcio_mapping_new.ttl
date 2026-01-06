@@ -1,0 +1,182 @@
+
+@prefix : <http://example.org/greenmind#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/greenmind>
+  a owl:Ontology ;
+  rdfs:comment "GreenMind OCEAN ↔ BCIO Mapping (starter). Connects PersonalityTrait, Behaviour (aligned to BCIO), and Metric. Includes example properties and individuals for OCR/GPS-driven features."@en .
+
+:Person a owl:Class ; rdfs:label "Person"@en .
+
+:PersonalityTrait a owl:Class ; rdfs:label "Personality Trait"@en .
+:Openness a owl:Class ; rdfs:subClassOf :PersonalityTrait ; rdfs:label "Openness"@en .
+:Conscientiousness a owl:Class ; rdfs:subClassOf :PersonalityTrait ; rdfs:label "Conscientiousness"@en .
+:Extraversion a owl:Class ; rdfs:subClassOf :PersonalityTrait ; rdfs:label "Extraversion"@en .
+:Agreeableness a owl:Class ; rdfs:subClassOf :PersonalityTrait ; rdfs:label "Agreeableness"@en .
+:Neuroticism a owl:Class ; rdfs:subClassOf :PersonalityTrait ; rdfs:label "Neuroticism"@en .
+
+:Behaviour a owl:Class ; rdfs:label "Behaviour"@en ; rdfs:comment "Superclass for BCIO behaviours."@en .
+:PurchasingBehaviour a owl:Class ; rdfs:subClassOf :Behaviour ; rdfs:label "Purchasing Behaviour"@en .
+:MobilityBehaviour a owl:Class ; rdfs:subClassOf :Behaviour ; rdfs:label "Mobility Behaviour"@en .
+:EatingBehaviour a owl:Class ; rdfs:subClassOf :Behaviour ; rdfs:label "Eating Behaviour"@en .
+:SocialInteraction a owl:Class ; rdfs:subClassOf :Behaviour ; rdfs:label "Social Interaction"@en .
+:GoalSettingBehaviour a owl:Class ; rdfs:subClassOf :Behaviour ; rdfs:label "Goal Setting Behaviour"@en .
+:AffectiveState a owl:Class ; rdfs:subClassOf :Behaviour ; rdfs:label "Affective State"@en .
+
+:Metric a owl:Class ; rdfs:label "Metric"@en ;
+  rdfs:comment "Quantitative feature from OCR/GPS/app logs (e.g., spend_variability, daily_distance_km)."@en .
+
+:isIndicatedBy a owl:ObjectProperty ;
+  rdfs:domain :PersonalityTrait ; rdfs:range :Behaviour ;
+  rdfs:label "is indicated by"@en ;
+  rdfs:comment "Trait is indicated by a behaviour (semantic link; direction controlled by rules/weights)."@en .
+
+:associatedMetric a owl:ObjectProperty ;
+  rdfs:domain :Behaviour ; rdfs:range :Metric ;
+  rdfs:label "associated metric"@en ;
+  rdfs:comment "Metrics that quantify the behaviour."@en .
+
+:observedBehaviour a owl:ObjectProperty ;
+  rdfs:domain :Person ; rdfs:range :Behaviour ;
+  rdfs:label "observed behaviour"@en ;
+  rdfs:comment "Person has an observed behaviour instance/data point."@en .
+
+:indicatesTrait a owl:ObjectProperty ;
+  rdfs:domain :Metric ; rdfs:range :PersonalityTrait ;
+  rdfs:label "indicates trait"@en ;
+  rdfs:comment "Optional direct link: a metric may indicate a trait under certain conditions."@en .
+
+:metricName a owl:DatatypeProperty ; rdfs:domain :Metric ; rdfs:range xsd:string ; rdfs:label "metric name"@en .
+:metricFormula a owl:DatatypeProperty ; rdfs:domain :Metric ; rdfs:range xsd:string ; rdfs:label "metric formula"@en .
+:directionOfEffect a owl:DatatypeProperty ; rdfs:domain :Metric ; rdfs:range xsd:string ; rdfs:label "direction of effect"@en ;
+  rdfs:comment "'up' if higher metric implies higher trait, 'down' if higher metric implies lower trait."@en .
+:thresholdValue a owl:DatatypeProperty ; rdfs:domain :Metric ; rdfs:range xsd:double ; rdfs:label "threshold"@en .
+:weight a owl:DatatypeProperty ; rdfs:domain :Metric ; rdfs:range xsd:double ; rdfs:label "weight"@en ; rdfs:comment "Relative contribution to trait score (0..1)."@en .
+:timeWindowDays a owl:DatatypeProperty ; rdfs:domain :Metric ; rdfs:range xsd:int ; rdfs:label "time window (days)"@en .
+:hasValue a owl:DatatypeProperty ; rdfs:domain :Metric ; rdfs:range xsd:double ; rdfs:label "value"@en .
+:rationale a owl:DatatypeProperty ; rdfs:domain :Metric ; rdfs:range xsd:string ; rdfs:label "rationale"@en .
+
+:metric_avgDailySpend a :Metric ;
+  :metricName "avg_daily_spend" ;
+  :metricFormula "sum(amount)/days" ;
+  :directionOfEffect "down" ;
+  :thresholdValue 1.00 ;
+  :weight 0.25 ;
+  :timeWindowDays 14 ;
+  :rationale "Chi tiêu/ngày vượt ngưỡng (chuẩn hoá theo thu nhập/nhu cầu) → Conscientiousness giảm"@vi ;
+  :indicatesTrait :Conscientiousness .
+
+:metric_spendVariability a :Metric ;
+  :metricName "spend_variability" ;
+  :metricFormula "std(amount)/mean(amount)" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 0.30 ;
+  :weight 0.35 ;
+  :timeWindowDays 14 ;
+  :rationale "Biến thiên chi tiêu cao → impulsive/không ổn định → Neuroticism↑"@vi ;
+  :indicatesTrait :Neuroticism .
+
+:metric_healthyFoodRatio a :Metric ;
+  :metricName "healthy_food_ratio" ;
+  :metricFormula "count(plant_based)/count(all_items)" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 0.40 ;
+  :weight 0.20 ;
+  :timeWindowDays 14 ;
+  :rationale "Ưa thực phẩm xanh/chay → Openness↑"@vi ;
+  :indicatesTrait :Openness .
+
+:metric_brandNovelty a :Metric ;
+  :metricName "brand_novelty" ;
+  :metricFormula "unique(new_brands)/unique(all_brands)" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 0.25 ;
+  :weight 0.30 ;
+  :timeWindowDays 30 ;
+  :rationale "Thử thương hiệu mới → Openness↑"@vi ;
+  :indicatesTrait :Openness .
+
+:metric_listAdherence a :Metric ;
+  :metricName "list_adherence" ;
+  :metricFormula "1 - unmatched_items/total_items" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 0.70 ;
+  :weight 0.35 ;
+  :timeWindowDays 7 ;
+  :rationale "Mua theo danh sách → kỷ luật → Conscientiousness↑"@vi ;
+  :indicatesTrait :Conscientiousness .
+
+:metric_dailyDistanceKm a :Metric ;
+  :metricName "daily_distance_km" ;
+  :metricFormula "Σ haversine(coords)" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 5.0 ;
+  :weight 0.25 ;
+  :timeWindowDays 7 ;
+  :rationale "Di chuyển nhiều, hoạt động xã hội → Extraversion↑"@vi ;
+  :indicatesTrait :Extraversion .
+
+:metric_publicTransitRatio a :Metric ;
+  :metricName "public_transit_ratio" ;
+  :metricFormula "time_on_transit/total_travel_time" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 0.30 ;
+  :weight 0.20 ;
+  :timeWindowDays 14 ;
+  :rationale "Ưu tiên phương tiện công cộng → Agreeableness↑"@vi ;
+  :indicatesTrait :Agreeableness .
+
+:metric_routineScore a :Metric ;
+  :metricName "routine_score" ;
+  :metricFormula "1 - location_entropy" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 0.60 ;
+  :weight 0.30 ;
+  :timeWindowDays 14 ;
+  :rationale "Lịch trình ổn định → Conscientiousness↑"@vi ;
+  :indicatesTrait :Conscientiousness .
+
+:metric_nightOutFreq a :Metric ;
+  :metricName "night_out_freq" ;
+  :metricFormula "count(checkin_20-02)/weeks" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 2.0 ;
+  :weight 0.20 ;
+  :timeWindowDays 4 ;
+  :rationale "Hoạt động xã hội ban đêm → Extraversion↑"@vi ;
+  :indicatesTrait :Extraversion .
+
+:metric_moodVolatility a :Metric ;
+  :metricName "mood_volatility" ;
+  :metricFormula "std(mood_slider)" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 1.20 ;
+  :weight 0.30 ;
+  :timeWindowDays 14 ;
+  :rationale "Biến thiên cảm xúc cao → Neuroticism↑"@vi ;
+  :indicatesTrait :Neuroticism .
+
+:metric_communityEngagement a :Metric ;
+  :metricName "community_engagement" ;
+  :metricFormula "posts+comments+reactions/week" ;
+  :directionOfEffect "up" ;
+  :thresholdValue 5.0 ;
+  :weight 0.20 ;
+  :timeWindowDays 4 ;
+  :rationale "Tương tác cộng đồng tích cực → Agreeableness↑"@vi ;
+  :indicatesTrait :Agreeableness .
+
+:PurchasingBehaviour :associatedMetric :metric_avgDailySpend, :metric_spendVariability, :metric_brandNovelty, :metric_listAdherence .
+:EatingBehaviour     :associatedMetric :metric_healthyFoodRatio .
+:MobilityBehaviour   :associatedMetric :metric_dailyDistanceKm, :metric_publicTransitRatio, :metric_routineScore, :metric_nightOutFreq .
+:SocialInteraction   :associatedMetric :metric_communityEngagement .
+:AffectiveState      :associatedMetric :metric_moodVolatility .
+
+:Openness          :isIndicatedBy :PurchasingBehaviour, :MobilityBehaviour, :EatingBehaviour .
+:Conscientiousness :isIndicatedBy :PurchasingBehaviour, :GoalSettingBehaviour, :MobilityBehaviour .
+:Extraversion      :isIndicatedBy :MobilityBehaviour, :SocialInteraction .
+:Agreeableness     :isIndicatedBy :SocialInteraction, :MobilityBehaviour .
+:Neuroticism       :isIndicatedBy :AffectiveState, :PurchasingBehaviour .

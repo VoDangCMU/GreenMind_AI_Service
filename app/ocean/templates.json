@@ -1,192 +1,439 @@
-{
-  "O": {
-    "frequency": [
-      {
-        "template_id": "O_F_001",
-        "sentence": "Bạn có thường {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
-        "ocean": "O"
-      },
-      {
-        "template_id": "O_F_002",
-        "sentence": "Trong cuộc sống hàng ngày, bạn {behavior} với tần suất thế nào?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["hiếm khi", "đôi khi", "thường xuyên", "rất thường xuyên"],
-        "ocean": "O"
-      }
-    ],
-    "yesno": [
-      {
-        "template_id": "O_YN_001",
-        "sentence": "Bạn có thích {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "O"
-      },
-      {
-        "template_id": "O_YN_002",
-        "sentence": "Bạn có hứng thú với việc {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "O"
-      }
-    ]
+[
+  {
+    "id": "T_FREQ_01",
+    "name": "Tần suất thực hiện hành động 1",
+    "description": "Khảo sát tần suất người tham gia một hành động cụ thể.",
+    "intent": "frequency",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["ocean","gender","age","keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, giới tính {gender}, độ tuổi {age}, mức độ yêu thích hành động {keywords} là như thế nào?",
+    "question_type": "frequency",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4],
+      "labels": ["Không bao giờ","Thỉnh thoảng","Thường xuyên","Rất thường xuyên"]
+    }
   },
-  "C": {
-    "frequency": [
-      {
-        "template_id": "C_F_001",
-        "sentence": "Bạn có thường {behavior} khi làm việc không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
-        "ocean": "C"
-      },
-      {
-        "template_id": "C_F_002",
-        "sentence": "Mỗi khi có nhiệm vụ quan trọng, bạn {behavior} như thế nào?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["hiếm khi", "đôi khi", "thường xuyên", "luôn luôn"],
-        "ocean": "C"
-      }
-    ],
-    "yesno": [
-      {
-        "template_id": "C_YN_001",
-        "sentence": "Bạn có thường chú ý đến chi tiết khi {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "C"
-      },
-      {
-        "template_id": "C_YN_002",
-        "sentence": "Bạn có cho rằng mình đáng tin cậy khi {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "C"
-      }
-    ]
+  {
+    "id": "T_FREQ_02",
+    "name": "Tần suất thực hiện hành động 2",
+    "description": "Đánh giá tần suất tham gia hành động trong ngày.",
+    "intent": "frequency",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["ocean","keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, thường thực hiện hành động {keywords} với tần suất nào?",
+    "question_type": "frequency",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4],
+      "labels": ["Không bao giờ","Thỉnh thoảng","Thường xuyên","Rất thường xuyên"]
+    }
   },
-  "E": {
-    "frequency": [
-      {
-        "template_id": "E_F_001",
-        "sentence": "Bạn có thường {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
-        "ocean": "E"
-      },
-      {
-        "template_id": "E_F_002",
-        "sentence": "Trong một tuần điển hình, bạn {behavior} bao nhiêu lần?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["0 lần", "1–2 lần", "3–5 lần", "hơn 5 lần"],
-        "ocean": "E"
-      }
-    ],
-    "yesno": [
-      {
-        "template_id": "E_YN_001",
-        "sentence": "Bạn có thích {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "E"
-      },
-      {
-        "template_id": "E_YN_002",
-        "sentence": "Bạn có cảm thấy thoải mái khi {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "E"
-      }
-    ]
+  {
+    "id": "T_FREQ_03",
+    "name": "Tần suất thực hiện hành động 3",
+    "description": "Khảo sát mức độ thường xuyên hành động cụ thể.",
+    "intent": "frequency",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["behavior","ocean","age","keywords"]
+    },
+    "prompt": "Người {behavior} có tính cách {ocean}, độ tuổi {age}, mức độ thực hiện {keywords} như thế nào?",
+    "question_type": "frequency",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4],
+      "labels": ["Không bao giờ","Thỉnh thoảng","Thường xuyên","Rất thường xuyên"]
+    }
   },
-  "A": {
-    "frequency": [
-      {
-        "template_id": "A_F_001",
-        "sentence": "Khi làm việc nhóm, bạn {behavior} với tần suất như thế nào?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
-        "ocean": "A"
-      },
-      {
-        "template_id": "A_F_002",
-        "sentence": "Trong các mối quan hệ, bạn có xu hướng {behavior} với mức độ ra sao?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["hiếm khi", "đôi khi", "thường xuyên", "rất thường xuyên"],
-        "ocean": "A"
-      }
-    ],
-    "yesno": [
-      {
-        "template_id": "A_YN_001",
-        "sentence": "Bạn có thích {behavior} để giúp đỡ người khác không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "A"
-      },
-      {
-        "template_id": "A_YN_002",
-        "sentence": "Bạn có dễ dàng tha thứ khi người khác {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "A"
-      }
-    ]
+
+  {
+    "id": "T_YN_01",
+    "name": "Thói quen hành động 1",
+    "description": "Xác định người có thực hiện hành động hay không.",
+    "intent": "yesno",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["ocean","gender","age","keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, giới tính {gender}, độ tuổi {age}, có thực hiện {keywords} không?",
+    "question_type": "yesno",
+    "answer": {
+      "type": "binary",
+      "options": ["Có","Không"]
+    }
   },
-  "N": {
-    "frequency": [
-      {
-        "template_id": "N_F_001",
-        "sentence": "Bạn {behavior} với tần suất như thế nào khi gặp tình huống căng thẳng?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["rất ít khi", "thỉnh thoảng", "thường xuyên", "gần như mọi lúc"],
-        "ocean": "N"
-      },
-      {
-        "template_id": "N_F_002",
-        "sentence": "Trong một tháng, bạn {behavior} bao nhiêu lần?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["0 lần", "1–2 lần", "3–5 lần", "hơn 5 lần"],
-        "ocean": "N"
-      }
-    ],
-    "yesno": [
-      {
-        "template_id": "N_YN_001",
-        "sentence": "Bạn có cảm thấy lo lắng khi {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "N"
-      },
-      {
-        "template_id": "N_YN_002",
-        "sentence": "Bạn có dễ bị căng thẳng khi {behavior} không?",
-        "slot": "behavior",
-        "value_behavior": [],
-        "value_slot": ["Có", "Không"],
-        "ocean": "N"
-      }
-    ]
+  {
+    "id": "T_YN_02",
+    "name": "Thói quen hành động 2",
+    "description": "Khảo sát xem hành động có được thực hiện hay không.",
+    "intent": "yesno",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["behavior","ocean","keywords"]
+    },
+    "prompt": "Người {behavior} có tính cách {ocean} có thường thực hiện {keywords} không?",
+    "question_type": "yesno",
+    "answer": {
+      "type": "binary",
+      "options": ["Có","Không"]
+    }
+  },
+  {
+    "id": "T_YN_03",
+    "name": "Thói quen hành động 3",
+    "description": "Xác định xu hướng thực hiện hành động.",
+    "intent": "yesno",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["ocean","age","keywords"]
+    },
+    "prompt": "Người có tính cách {ocean} và độ tuổi {age} có thực hiện hành động {keywords} không?",
+    "question_type": "yesno",
+    "answer": {
+      "type": "binary",
+      "options": ["Có","Không"]
+    }
+  },
+
+  {
+    "id": "T_LIKERT_01",
+    "name": "Mức độ yêu thích hành động 1",
+    "description": "Đánh giá mức độ yêu thích hành động cụ thể.",
+    "intent": "likert5",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["ocean","gender","age","keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, giới tính {gender}, độ tuổi {age}, yêu thích hành động {keywords} ở mức nào?",
+    "question_type": "likert5",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất không thích","Không thích","Bình thường","Thích","Rất thích"]
+    }
+  },
+  {
+    "id": "T_LIKERT_02",
+    "name": "Mức độ yêu thích hành động 2",
+    "description": "Đánh giá cảm xúc với hành động cụ thể.",
+    "intent": "likert5",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["behavior","ocean","keywords"]
+    },
+    "prompt": "Người {behavior} có tính cách {ocean}, mức độ yêu thích {keywords} là như thế nào?",
+    "question_type": "likert5",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất không thích","Không thích","Bình thường","Thích","Rất thích"]
+    }
+  },
+  {
+    "id": "T_LIKERT_03",
+    "name": "Mức độ yêu thích hành động 3",
+    "description": "Đánh giá sự quan tâm hành động cụ thể.",
+    "intent": "likert5",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["ocean","age","keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, độ tuổi {age}, cảm thấy mức độ yêu thích hành động {keywords} như thế nào?",
+    "question_type": "likert5",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất không thích","Không thích","Bình thường","Thích","Rất thích"]
+    }
+  },
+
+  {
+    "id": "T_RATING_01",
+    "name": "Đánh giá hành động 1",
+    "description": "Đánh giá hành động theo thang điểm 5.",
+    "intent": "rating",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["ocean","keywords"]
+    },
+    "prompt": "Người có tính cách {ocean} đánh giá hành động {keywords} theo mức độ thế nào?",
+    "question_type": "rating",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất tệ","Tệ","Bình thường","Tốt","Rất tốt"]
+    }
+  },
+  {
+    "id": "T_RATING_02",
+    "name": "Đánh giá hành động 2",
+    "description": "Đánh giá sự hài lòng với hành động cụ thể.",
+    "intent": "rating",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["behavior","ocean","keywords"]
+    },
+    "prompt": "Người {behavior} có tính cách {ocean} đánh giá hành động {keywords} như thế nào?",
+    "question_type": "rating",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất tệ","Tệ","Bình thường","Tốt","Rất tốt"]
+    }
+  },
+  {
+    "id": "T_RATING_03",
+    "name": "Đánh giá hành động 3",
+    "description": "Khảo sát đánh giá hành động cụ thể theo thang điểm.",
+    "intent": "rating",
+    "placeholders": {
+      "required": ["ocean","keywords"],
+      "optional": ["behavior","age","gender","location"],
+      "used_placeholders": ["ocean","age","keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, độ tuổi {age}, đánh giá hành động {keywords} theo mức độ thế nào?",
+    "question_type": "rating",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất tệ","Tệ","Bình thường","Tốt","Rất tốt"]
+    }
+  },
+
+
+
+  
+  {
+    "id": "T_FREQ_04",
+    "name": "Tần suất thực hiện hành động 4",
+    "description": "Khảo sát mức độ thường xuyên người tham gia thực hiện hành động trong môi trường cụ thể.",
+    "intent": "frequency",
+    "placeholders": {
+      "required": ["ocean", "keywords"],
+      "optional": ["behavior", "age", "gender", "location"],
+      "used_placeholders": ["ocean", "location", "keywords"]
+    },
+    "prompt": "Người có tính cách {ocean} thường thực hiện hành động {keywords} ở khu vực {location} với tần suất thế nào?",
+    "question_type": "frequency",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4],
+      "labels": ["Không bao giờ", "Thỉnh thoảng", "Thường xuyên", "Rất thường xuyên"]
+    }
+  },
+  {
+    "id": "T_FREQ_05",
+    "name": "Tần suất thực hiện hành động 5",
+    "description": "Đánh giá mức độ lặp lại hành động theo độ tuổi và giới tính.",
+    "intent": "frequency",
+    "placeholders": {
+      "required": ["ocean", "keywords"],
+      "optional": ["age", "gender", "location"],
+      "used_placeholders": ["ocean", "gender", "age", "keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, giới tính {gender}, độ tuổi {age}, thường thực hiện hành động {keywords} bao nhiêu lần?",
+    "question_type": "frequency",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4],
+      "labels": ["Không bao giờ", "Hiếm khi", "Thường xuyên", "Rất thường xuyên"]
+    }
+  },
+  {
+    "id": "T_FREQ_06",
+    "name": "Tần suất thực hiện hành động 6",
+    "description": "Xác định tần suất hành động trong bối cảnh hành vi cụ thể.",
+    "intent": "frequency",
+    "placeholders": {
+      "required": ["ocean", "keywords"],
+      "optional": ["behavior", "age"],
+      "used_placeholders": ["behavior", "ocean", "keywords"]
+    },
+    "prompt": "Khi {behavior}, người có tính cách {ocean} thường thực hiện {keywords} với mức độ nào?",
+    "question_type": "frequency",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4],
+      "labels": ["Không bao giờ", "Thỉnh thoảng", "Thường xuyên", "Rất thường xuyên"]
+    }
+  },
+
+  {
+    "id": "T_YN_04",
+    "name": "Thói quen hành động 4",
+    "description": "Xác định người ở khu vực cụ thể có thực hiện hành động không.",
+    "intent": "yesno",
+    "placeholders": {
+      "required": ["ocean", "keywords"],
+      "optional": ["location", "age"],
+      "used_placeholders": ["ocean", "location", "keywords"]
+    },
+    "prompt": "Người có tính cách {ocean} sống tại {location} có thực hiện hành động {keywords} không?",
+    "question_type": "yesno",
+    "answer": {
+      "type": "binary",
+      "options": ["Có", "Không"]
+    }
+  },
+  {
+    "id": "T_YN_05",
+    "name": "Thói quen hành động 5",
+    "description": "Khảo sát xem người có xu hướng tính cách nhất định có thường làm hành động này không.",
+    "intent": "yesno",
+    "placeholders": {
+      "required": ["ocean", "keywords"],
+      "optional": ["behavior", "age", "gender"],
+      "used_placeholders": ["ocean", "gender", "keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, giới tính {gender}, có xu hướng thực hiện {keywords} không?",
+    "question_type": "yesno",
+    "answer": {
+      "type": "binary",
+      "options": ["Có", "Không"]
+    }
+  },
+  {
+    "id": "T_YN_06",
+    "name": "Thói quen hành động 6",
+    "description": "Xác định khả năng người có hành vi cụ thể thực hiện hành động.",
+    "intent": "yesno",
+    "placeholders": {
+      "required": ["behavior", "ocean", "keywords"],
+      "optional": ["age"],
+      "used_placeholders": ["behavior", "ocean", "age", "keywords"]
+    },
+    "prompt": "Người {behavior}, có tính cách {ocean}, độ tuổi {age}, có thực hiện hành động {keywords} không?",
+    "question_type": "yesno",
+    "answer": {
+      "type": "binary",
+      "options": ["Có", "Không"]
+    }
+  },
+
+  {
+    "id": "T_LIKERT_04",
+    "name": "Mức độ yêu thích hành động 4",
+    "description": "Khảo sát cảm xúc của người ở địa điểm cụ thể với hành động.",
+    "intent": "likert5",
+    "placeholders": {
+      "required": ["ocean", "keywords"],
+      "optional": ["location", "gender"],
+      "used_placeholders": ["ocean", "location", "keywords"]
+    },
+    "prompt": "Người có tính cách {ocean} ở khu vực {location} cảm thấy mức độ yêu thích hành động {keywords} như thế nào?",
+    "question_type": "likert5",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất không thích", "Không thích", "Bình thường", "Thích", "Rất thích"]
+    }
+  },
+  {
+    "id": "T_LIKERT_05",
+    "name": "Mức độ yêu thích hành động 5",
+    "description": "Đánh giá mức độ yêu thích của người có hành vi cụ thể đối với hành động.",
+    "intent": "likert5",
+    "placeholders": {
+      "required": ["behavior", "ocean", "keywords"],
+      "optional": ["age", "gender"],
+      "used_placeholders": ["behavior", "ocean", "gender", "keywords"]
+    },
+    "prompt": "Người {behavior}, có tính cách {ocean}, giới tính {gender}, cảm thấy hành động {keywords} ở mức độ nào?",
+    "question_type": "likert5",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất không thích", "Không thích", "Bình thường", "Thích", "Rất thích"]
+    }
+  },
+  {
+    "id": "T_LIKERT_06",
+    "name": "Mức độ yêu thích hành động 6",
+    "description": "Khảo sát sự hứng thú với hành động theo độ tuổi và tính cách.",
+    "intent": "likert5",
+    "placeholders": {
+      "required": ["ocean", "keywords"],
+      "optional": ["age"],
+      "used_placeholders": ["ocean", "age", "keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, độ tuổi {age}, cảm thấy hứng thú với hành động {keywords} ở mức nào?",
+    "question_type": "likert5",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất không thích", "Không thích", "Bình thường", "Thích", "Rất thích"]
+    }
+  },
+
+  {
+    "id": "T_RATING_04",
+    "name": "Đánh giá hành động 4",
+    "description": "Đánh giá hành động dựa trên trải nghiệm của người ở độ tuổi cụ thể.",
+    "intent": "rating",
+    "placeholders": {
+      "required": ["ocean", "keywords"],
+      "optional": ["age"],
+      "used_placeholders": ["ocean", "age", "keywords"]
+    },
+    "prompt": "Người có tính cách {ocean}, độ tuổi {age}, đánh giá hành động {keywords} ở mức độ thế nào?",
+    "question_type": "rating",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất tệ", "Tệ", "Bình thường", "Tốt", "Rất tốt"]
+    }
+  },
+  {
+    "id": "T_RATING_05",
+    "name": "Đánh giá hành động 5",
+    "description": "Khảo sát mức độ hài lòng theo hành vi và giới tính.",
+    "intent": "rating",
+    "placeholders": {
+      "required": ["behavior", "ocean", "keywords"],
+      "optional": ["gender"],
+      "used_placeholders": ["behavior", "ocean", "gender", "keywords"]
+    },
+    "prompt": "Người {behavior}, có tính cách {ocean}, giới tính {gender}, đánh giá hành động {keywords} như thế nào?",
+    "question_type": "rating",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất tệ", "Tệ", "Bình thường", "Tốt", "Rất tốt"]
+    }
+  },
+  {
+    "id": "T_RATING_06",
+    "name": "Đánh giá hành động 6",
+    "description": "Đánh giá tổng quan hành động theo vị trí địa lý và tính cách.",
+    "intent": "rating",
+    "placeholders": {
+      "required": ["ocean", "keywords"],
+      "optional": ["location"],
+      "used_placeholders": ["ocean", "location", "keywords"]
+    },
+    "prompt": "Người có tính cách {ocean} tại {location} đánh giá hành động {keywords} như thế nào?",
+    "question_type": "rating",
+    "answer": {
+      "type": "scale",
+      "scale": [1,2,3,4,5],
+      "labels": ["Rất tệ", "Tệ", "Bình thường", "Tốt", "Rất tốt"]
+    }
   }
-}
+
+]
