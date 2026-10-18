@@ -2,9 +2,14 @@ import requests
 import json
 from functools import lru_cache
 import itertools
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
 
+API_KEYS = [k.strip() for k in os.getenv("GEMINI_API_KEYS", os.getenv("GEMINI_API_KEY", "")).split(",") if k.strip()]
 
 api_key_cycle = itertools.cycle(API_KEYS)
 

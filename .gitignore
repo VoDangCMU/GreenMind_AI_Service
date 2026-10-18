@@ -20,3 +20,10 @@ Thumbs.db
 *.log
 
 .ipynb_checkpoints/
+
+# secrets & local env
+.env
+captones_env/
+hf_cache/
+uploads/
+qdrant/qdrant_data/
